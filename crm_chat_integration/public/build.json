@@ -1,0 +1,4 @@
+{
+  "js/chat.js": ["public/js/crm_chat_integration.bundle.js"],
+  "css/chat.css": ["public/scss/crm_chat_integration.bundle.scss"]
+}

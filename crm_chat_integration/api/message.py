@@ -1,6 +1,10 @@
 import frappe
 from frappe import _
-from chat.utils import update_room, is_user_allowed_in_room, raise_not_authorized_error
+from crm_chat_integration.utils import (
+    update_room,
+    is_user_allowed_in_room,
+    raise_not_authorized_error,
+)
 
 
 @frappe.whitelist(allow_guest=True)

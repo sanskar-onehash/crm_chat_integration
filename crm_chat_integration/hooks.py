@@ -1,7 +1,7 @@
 from . import __version__ as app_version
 from frappe import __version__ as frappe_version
 
-app_name = "chat"
+app_name = "crm_chat_integration"
 app_title = "OneHash Chat"
 app_publisher = "Abhishek Chougule"
 app_description = "Chat application for OneHash"
@@ -10,25 +10,37 @@ app_color = "grey"
 app_email = "abhishek.c@onehash.ai"
 app_license = "MIT"
 guest_title = app_title
-is_frappe_above_v13 = int(frappe_version.split('.')[0]) > 13
+is_frappe_above_v13 = int(frappe_version.split(".")[0]) > 13
 
 # Includes in <head>
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = ['chat.bundle.css'] if is_frappe_above_v13 else [
-    '/assets/css/chat.css']
-app_include_js = ['chat.bundle.js'] if is_frappe_above_v13 else [
-    '/assets/js/chat.js']
+app_include_css = (
+    ["crm_chat_integration.bundle.css"]
+    if is_frappe_above_v13
+    else ["/assets/css/crm_chat_integration.css"]
+)
+app_include_js = (
+    ["crm_chat_integration.bundle.js"]
+    if is_frappe_above_v13
+    else ["/assets/js/crm_chat_integration.js"]
+)
 
 # include js, css files in header of web template
-web_include_css = ['chat.bundle.css'] if is_frappe_above_v13 else [
-    '/assets/css/chat.css']
-web_include_js = ['chat.bundle.js'] if is_frappe_above_v13 else [
-    '/assets/js/chat.js']
+web_include_css = (
+    ["crm_chat_integration.bundle.css"]
+    if is_frappe_above_v13
+    else ["/assets/css/crm_chat_integration.css"]
+)
+web_include_js = (
+    ["crm_chat_integration.bundle.js"]
+    if is_frappe_above_v13
+    else ["/assets/js/crm_chat_integration.js"]
+)
 
 # include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "chat/public/scss/website"
+# website_theme_scss = "crm_chat_integration/public/scss/website"
 
 # include js, css files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
@@ -51,7 +63,7 @@ web_include_js = ['chat.bundle.js'] if is_frappe_above_v13 else [
 
 # website user home page (by Role)
 # role_home_page = {
-#	"Role": "home_page"
+# 	"Role": "home_page"
 # }
 
 # Generators
@@ -65,21 +77,21 @@ web_include_js = ['chat.bundle.js'] if is_frappe_above_v13 else [
 
 # add methods and filters to jinja environment
 # jinja = {
-# 	"methods": "chat.utils.jinja_methods",
-# 	"filters": "chat.utils.jinja_filters"
+# 	"methods": "crm_chat_integration.utils.jinja_methods",
+# 	"filters": "crm_chat_integration.utils.jinja_filters"
 # }
 
 # Installation
 # ------------
 
-# before_install = "chat.install.before_install"
-after_install = "chat.patches.migrate_chat_data.execute"
+# before_install = "crm_chat_integration.install.before_install"
+after_install = "crm_chat_integration.patches.migrate_chat_data.execute"
 
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "chat.notifications.get_notification_config"
+# notification_config = "crm_chat_integration.notifications.get_notification_config"
 
 # Permissions
 # -----------
@@ -110,7 +122,7 @@ after_install = "chat.patches.migrate_chat_data.execute"
 # 		"on_update": "method",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
-#	}
+# 	}
 # }
 
 # Scheduled Tasks
@@ -118,39 +130,39 @@ after_install = "chat.patches.migrate_chat_data.execute"
 
 # scheduler_events = {
 # 	"all": [
-# 		"chat.tasks.all"
+# 		"crm_chat_integration.tasks.all"
 # 	],
 # 	"daily": [
-# 		"chat.tasks.daily"
+# 		"crm_chat_integration.tasks.daily"
 # 	],
 # 	"hourly": [
-# 		"chat.tasks.hourly"
+# 		"crm_chat_integration.tasks.hourly"
 # 	],
 # 	"weekly": [
-# 		"chat.tasks.weekly"
+# 		"crm_chat_integration.tasks.weekly"
 # 	],
 # 	"monthly": [
-# 		"chat.tasks.monthly"
+# 		"crm_chat_integration.tasks.monthly"
 # 	],
 # }
 
 # Testing
 # -------
 
-# before_tests = "chat.install.before_tests"
+# before_tests = "crm_chat_integration.install.before_tests"
 
 # Overriding Methods
 # ------------------------------
 #
 # override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "chat.event.get_events"
+# 	"frappe.desk.doctype.event.event.get_events": "crm_chat_integration.event.get_events"
 # }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
 # override_doctype_dashboards = {
-# 	"Task": "chat.task.get_dashboard_data"
+# 	"Task": "crm_chat_integration.task.get_dashboard_data"
 # }
 
 # exempt linked doctypes from being automatically cancelled
@@ -186,11 +198,24 @@ after_install = "chat.patches.migrate_chat_data.execute"
 # --------------------------------
 
 # auth_hooks = [
-# 	"chat.auth.validate"
+# 	"crm_chat_integration.auth.validate"
 # ]
 
 sounds = [
-    {'name': 'chat-notification', 'src': '/assets/chat/sounds/chat-notification.mp3', 'volume': 0.2},
-    {'name': 'chat-message-send', 'src': '/assets/chat/sounds/chat-message-send.mp3', 'volume': 0.2},
-    {'name': 'chat-message-receive', 'src': '/assets/chat/sounds/chat-message-receive.mp3', 'volume': 0.5}
+    {
+        "name": "chat-notification",
+        "src": "/assets/crm_chat_integration/sounds/chat-notification.mp3",
+        "volume": 0.2,
+    },
+    {
+        "name": "chat-message-send",
+        "src": "/assets/crm_chat_integration/sounds/chat-message-send.mp3",
+        "volume": 0.2,
+    },
+    {
+        "name": "chat-message-receive",
+        "src": "/assets/crm_chat_integration/sounds/chat-message-receive.mp3",
+        "volume": 0.5,
+    },
 ]
+
