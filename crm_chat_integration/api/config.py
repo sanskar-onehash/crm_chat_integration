@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from chat.utils import validate_token, get_admin_name, get_chat_settings, get_user_settings
+from crm_chat_integration.utils import validate_token, get_admin_name, get_chat_settings, get_user_settings
 import json
 
 
