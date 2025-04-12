@@ -34,7 +34,7 @@ describe('Guest View', () => {
       method: 'POST',
       url: '/',
       headers: {
-        'X-Frappe-CMD': 'chat.api.user.get_guest_room',
+        'X-Frappe-CMD': 'crm_chat_integration.api.user.get_guest_room',
       },
     }).as('submit');
 

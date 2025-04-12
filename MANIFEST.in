@@ -4,15 +4,15 @@ include *.json
 include *.md
 include *.py
 include *.txt
-recursive-include chat *.css
-recursive-include chat *.csv
-recursive-include chat *.html
-recursive-include chat *.ico
-recursive-include chat *.js
-recursive-include chat *.json
-recursive-include chat *.md
-recursive-include chat *.png
-recursive-include chat *.py
-recursive-include chat *.svg
-recursive-include chat *.txt
-recursive-exclude chat *.pyc
+recursive-include crm_chat_integration *.css
+recursive-include crm_chat_integration *.csv
+recursive-include crm_chat_integration *.html
+recursive-include crm_chat_integration *.ico
+recursive-include crm_chat_integration *.js
+recursive-include crm_chat_integration *.json
+recursive-include crm_chat_integration *.md
+recursive-include crm_chat_integration *.png
+recursive-include crm_chat_integration *.py
+recursive-include crm_chat_integration *.svg
+recursive-include crm_chat_integration *.txt
+recursive-exclude crm_chat_integration *.pyc

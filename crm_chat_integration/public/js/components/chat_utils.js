@@ -48,7 +48,7 @@ function is_image(filename) {
 async function get_rooms(email) {
   const res = await frappe.call({
     type: 'GET',
-    method: 'chat.api.room.get',
+    method: 'crm_chat_integration.api.room.get',
     args: {
       email: email,
     },
@@ -58,7 +58,7 @@ async function get_rooms(email) {
 
 async function get_messages(room, email) {
   const res = await frappe.call({
-    method: 'chat.api.message.get_all',
+    method: 'crm_chat_integration.api.message.get_all',
     args: {
       room: room,
       email: email,
@@ -70,7 +70,7 @@ async function get_messages(room, email) {
 async function send_message(content, user, room, email) {
   try {
     await frappe.call({
-      method: 'chat.api.message.send',
+      method: 'crm_chat_integration.api.message.send',
       args: {
         content: content,
         user: user,
@@ -89,7 +89,7 @@ async function send_message(content, user, room, email) {
 async function get_settings(token) {
   const res = await frappe.call({
     type: 'GET',
-    method: 'chat.api.config.settings',
+    method: 'crm_chat_integration.api.config.settings',
     args: {
       token: token,
     },
@@ -100,7 +100,7 @@ async function get_settings(token) {
 async function mark_message_read(room) {
   try {
     await frappe.call({
-      method: 'chat.api.message.mark_as_read',
+      method: 'crm_chat_integration.api.message.mark_as_read',
       args: {
         room: room,
       },
@@ -110,10 +110,9 @@ async function mark_message_read(room) {
   }
 }
 
-
 async function create_guest({ email, full_name, message }) {
   const res = await frappe.call({
-    method: 'chat.api.user.get_guest_room',
+    method: 'crm_chat_integration.api.user.get_guest_room',
     args: {
       email: email,
       full_name: full_name,
@@ -126,7 +125,7 @@ async function create_guest({ email, full_name, message }) {
 async function set_typing(room, user, is_typing, is_guest) {
   try {
     await frappe.call({
-      method: 'chat.api.message.set_typing',
+      method: 'crm_chat_integration.api.message.set_typing',
       args: {
         room: room,
         user: user,
@@ -141,7 +140,7 @@ async function set_typing(room, user, is_typing, is_guest) {
 
 async function create_private_room(room_name, users, type) {
   await frappe.call({
-    method: 'chat.api.room.create_private',
+    method: 'crm_chat_integration.api.room.create_private',
     args: {
       room_name: room_name,
       users: users,
@@ -152,7 +151,7 @@ async function create_private_room(room_name, users, type) {
 
 async function set_user_settings(settings) {
   await frappe.call({
-    method: 'chat.api.config.user_settings',
+    method: 'crm_chat_integration.api.config.user_settings',
     args: {
       settings: settings,
     },

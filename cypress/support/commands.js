@@ -34,7 +34,7 @@ Cypress.Commands.add('send_message', (message, room) => {
     .its('frappe')
     .then((frappe) => {
       frappe.call({
-        method: 'chat.api.message.send',
+        method: 'crm_chat_integration.api.message.send',
         args: {
           content: message,
           user: 'Administrator',
