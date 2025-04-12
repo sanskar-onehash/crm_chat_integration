@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from chat.utils import get_full_name
+from crm_chat_integration.utils import get_full_name
 import ast
 from typing import List, Dict
 
