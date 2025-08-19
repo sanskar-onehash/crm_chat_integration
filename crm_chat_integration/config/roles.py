@@ -1,0 +1,5 @@
+ROLES = [
+    {
+        "name": "Chat Manager",
+    },
+]

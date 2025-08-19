@@ -84,7 +84,7 @@ web_include_js = (
 # Installation
 # ------------
 
-# before_install = "crm_chat_integration.install.before_install"
+before_install = "crm_chat_integration.install.before_install"
 after_install = "crm_chat_integration.patches.migrate_chat_data.execute"
 
 # Desk Notifications
@@ -218,4 +218,3 @@ sounds = [
         "volume": 0.5,
     },
 ]
-
