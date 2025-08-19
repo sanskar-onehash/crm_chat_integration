@@ -13,30 +13,44 @@ def get(email: str) -> List[Dict]:
         email (str): Email of user requests all rooms
 
     """
-    room_doctype = frappe.qb.DocType('Chat Room')
+    room_doctype = frappe.qb.DocType("Chat Room")
 
     all_rooms = (
         frappe.qb.from_(room_doctype)
-        .select('name', 'modified', 'last_message', 'is_read', 'room_name', 'members', 'type')
-        .where((room_doctype.type.like('Guest') | room_doctype.members.like(f'%{email}%')))
-
+        .select(
+            "name",
+            "modified",
+            "last_message",
+            "is_read",
+            "room_name",
+            "members",
+            "type",
+        )
+        .where(
+            (room_doctype.type.like("Guest") | room_doctype.members.like(f"%{email}%"))
+        )
     ).run(as_dict=True)
 
     user_rooms = []
 
     for room in all_rooms:
-        if room['type'] == 'Direct':
-            members = room['members'].split(', ')
-            room['room_name'] = get_full_name(
-                members[0]) if email == members[1] else get_full_name(members[1])
-            room['opposite_person_email'] = members[0] if members[1] == email else members[1]
-        if room['type'] == 'Guest':
-            users = frappe.get_cached_doc("Chat Room", room['name']).users
+        if room["type"] == "Direct":
+            members = room["members"].split(", ")
+            room["room_name"] = (
+                get_full_name(members[0])
+                if email == members[1]
+                else get_full_name(members[1])
+            )
+            room["opposite_person_email"] = (
+                members[0] if members[1] == email else members[1]
+            )
+        if room["type"] == "Group":
+            users = frappe.get_cached_doc("Chat Room", room["name"]).users
             if not users:
-                users = frappe.get_cached_doc('Chat Settings').chat_operators
+                users = frappe.get_cached_doc("Chat Settings").chat_operators
             if email not in [u.user for u in users]:
                 continue
-        room['is_read'] = 1 if room['is_read'] and email in room['is_read'] else 0
+        room["is_read"] = 1 if room["is_read"] and email in room["is_read"] else 0
         user_rooms.append(room)
 
     user_rooms.sort(key=lambda room: comparator(room))
@@ -67,7 +81,9 @@ def create_private(room_name, users, type):
         if direct_room_exists:
             frappe.throw(title="Error", msg=_("Direct Room already exists!"))
 
-    room_doc = get_private_room_doc(room_name, members, type).insert(ignore_permissions=True)
+    room_doc = get_private_room_doc(room_name, members, type).insert(
+        ignore_permissions=True
+    )
 
     profile = {
         "room_name": room_name,
@@ -90,19 +106,18 @@ def create_private(room_name, users, type):
 
 
 def get_private_room_doc(room_name, members, type):
-    return frappe.get_doc({
-        'doctype': 'Chat Room',
-        'room_name': room_name,
-        'members': members,
-        'type': type,
-    })
+    return frappe.get_doc(
+        {
+            "doctype": "Chat Room",
+            "room_name": room_name,
+            "members": members,
+            "type": type,
+        }
+    )
 
 
 def comparator(key):
-    return (
-        key.is_read,
-        reversor(key.modified)
-    )
+    return (key.is_read, reversor(key.modified))
 
 
 class reversor:
